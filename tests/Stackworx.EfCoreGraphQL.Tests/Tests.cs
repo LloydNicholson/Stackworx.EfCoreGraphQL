@@ -64,6 +64,7 @@ public class Tests
                 KeyType = typeof(int),
                 ReferenceField = "UserId",
                 DbContextType = typeof(AppDbContext),
+                IsShadowProperty = false,
             });
             
             dataLoaderConfig.Emit().Should().MatchSource(
@@ -440,6 +441,7 @@ public class Tests
                 KeyType = typeof(int),
                 ReferenceField = "Id",
                 DbContextType = typeof(AppDbContext),
+                IsShadowProperty = false,
             });
 
             return Task.CompletedTask;
