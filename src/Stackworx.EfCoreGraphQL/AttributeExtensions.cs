@@ -2,8 +2,9 @@ namespace Stackworx.EfCoreGraphQL;
 
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Stackworx.EfCoreGraphQL.Abstractions;
 
-public static class GraphQLExtensions
+public static class AttributeExtensions
 {
     public static bool HasGraphQLIgnore(this INavigationBase nav)
     {
@@ -23,10 +24,19 @@ public static class GraphQLExtensions
             });
     }
     
-    public static bool HasGraphQLIgnore(this IEntityType entityType)
+    public static bool ShouldIgnore(this IEntityType entityType)
     {
         var clrType = entityType.ClrType;
         // Check for any attribute whose name matches GraphQLIgnoreAttribute
+
+        var ignored = clrType
+            .GetCustomAttribute<EFCoreGraphQLIgnoreAttribute>() is not null;
+
+        if (ignored)
+        {
+            return true;
+        }
+        
         return clrType
             .GetCustomAttributes(inherit: true)
             .Any(a =>

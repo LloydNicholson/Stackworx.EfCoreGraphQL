@@ -1,6 +1,5 @@
 namespace Stackworx.EfCoreGraphQL;
 
-using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -39,7 +38,7 @@ public static class DataLoaderGenerator
                      .Where(e => !e.IsOwned())
                      .OrderBy(e => e.Name))
         {
-            if (entity.HasGraphQLIgnore())
+            if (entity.ShouldIgnore())
             {
                 continue;
             }
@@ -71,7 +70,9 @@ public static class DataLoaderGenerator
 
         if (entity.FindPrimaryKey()?.Properties.Count == 1)
         {
-            sb.AppendLine(DataLoader.FromEntity(dbContext, entity).Emit());
+            var dataLoader = DataLoader.FromEntity(dbContext, entity);
+            sb.Append(dataLoader.EmitComment());
+            sb.AppendLine(dataLoader.Emit());
         }
 
         foreach (var navigation in entity.GetNavigations()
@@ -92,10 +93,14 @@ public static class DataLoaderGenerator
             // Skip dependant navigations
             if (!navigation.IsOnDependent)
             {
-                sb.AppendLine(DataLoader.FromNavigation(dbContext, navigation).Emit());
+                var dataLoader = DataLoader.FromNavigation(dbContext, navigation);
+                sb.Append(dataLoader.EmitComment());
+                sb.AppendLine(dataLoader.Emit());
             }
-            
-            sb.AppendLine(FieldExtension.FromNavigation(dbContext, navigation).Emit());
+
+            var field = FieldExtension.FromNavigation(dbContext, navigation);
+            sb.Append(field.EmitComment());
+            sb.AppendLine(field.Emit());
         }
 
         foreach (var navigation in entity.GetSkipNavigations()

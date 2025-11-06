@@ -7,8 +7,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 public record DataLoader
 {
     public required string LoaderName { get; init; }
-    
-    public string? JoinPropertyName { get; init; }
 
     public required Type EntityType { get; init; }
 
@@ -57,7 +55,7 @@ public record DataLoader
             IsShadowProperty = pkProp.IsShadowProperty(),
             EntityType = entityType.ClrType,
             DbContextType = dbContext.GetType(),
-            // Notes = $"{entityType.Name} Primary Key Data Loader",
+            Notes = $"Primary Key Data Loader for <see cref=\"{TypeUtils.GetNestedQualifiedName(entityType.ClrType)}\"/>",
         };
     }
     
@@ -103,10 +101,19 @@ public record DataLoader
             IsShadowProperty = prop.IsShadowProperty(),
             EntityType = entityType.ClrType,
             DbContextType = dbContext.GetType(),
-            Notes = null,
+            Notes = $"Navigation Data Loader for <see cref=\"{TypeUtils.GetNestedQualifiedName(entityType.ClrType)}.{nav.Inverse?.Name}\"/>",
         };
     }
-    
+
+    public string EmitComment()
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// {this.Notes}");
+        sb.AppendLine($"    /// </summary>");
+        return sb.ToString();
+    }
+
     public string Emit()
     {
         var sb = new StringBuilder();

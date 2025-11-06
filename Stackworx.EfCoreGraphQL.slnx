@@ -3,6 +3,7 @@
     <Project Path="sample\Sample\Sample.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/src/">
+    <Project Path="src\Stackworx.EfCoreGraphQL.Abstractions\Stackworx.EfCoreGraphQL.Abstractions.csproj" Type="Classic C#" />
     <Project Path="src\Stackworx.EfCoreGraphQL\Stackworx.EfCoreGraphQL.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/tests/">

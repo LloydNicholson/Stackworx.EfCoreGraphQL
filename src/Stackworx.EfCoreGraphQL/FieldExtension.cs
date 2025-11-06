@@ -36,7 +36,8 @@ public record FieldExtension
 
         // We expect only a single property
         var fk = nav.ForeignKey;
-        var notes = $"{declaringType.Name}.{nav.Name}";
+        var notes =
+            $"GraphQL Field Override for <see cref=\"{TypeUtils.GetNestedQualifiedName(nav.DeclaringEntityType.ClrType)}.{nav.Name}\"/>";
 
         var isCollection = nav.IsCollection;
         IProperty prop;
@@ -90,67 +91,14 @@ public record FieldExtension
             Notes = notes,
         };
     }
-    
-    public static FieldExtension FromNavigation(DbContext dbContext, ISkipNavigation nav)
+
+    public string EmitComment()
     {
-        var declaringType = nav.DeclaringEntityType.ClrType;
-        var targetType = nav.TargetEntityType.ClrType;
-
-        // We expect only a single property
-        var fk = nav.ForeignKey;
-        var notes = $"{declaringType.Name}.{nav.Name}";
-
-        var isCollection = nav.IsCollection;
-        IProperty prop;
-        bool childTypeNullable;
-
-        // Build the loader name
-        string loaderName;
-        if (isCollection)
-        {
-            // No reason for GroupedDataLoader to return null in the list
-            childTypeNullable = false;
-            
-            var parentProp = fk.PrincipalKey.Properties.Single();
-            var childProp = fk.Properties.Single();
-            var loaderProp = nav.DeclaringType == fk.PrincipalEntityType ? childProp : parentProp;
-            
-            prop = nav.DeclaringType == fk.PrincipalEntityType ? parentProp : childProp;
-            loaderName = $"I{LoaderNames.GroupLoaderName(nav.TargetEntityType    , loaderProp)}DataLoader";
-        }
-        else
-        {
-            childTypeNullable = !nav.ForeignKey.IsRequired;
-            
-            var parentProp = fk.PrincipalKey.Properties.Single();
-            var childProp = fk.Properties.Single();
-
-            if (nav.IsOnDependent)
-            {
-                prop = childProp;
-                loaderName = $"I{LoaderNames.BatchLoaderName(nav.TargetEntityType, parentProp)}DataLoader";
-            }
-            else
-            {
-                prop = parentProp;
-                loaderName = $"I{LoaderNames.BatchLoaderName(nav.TargetEntityType, childProp)}DataLoader";
-            }
-        }
-
-        return new FieldExtension
-        {
-            ParentType = declaringType,
-            ChildType = targetType,
-            ChildTypeNullable = childTypeNullable,
-            NavigationName = nav.Name,
-            ReferenceField = prop.Name,
-            ReferenceFieldNullable = prop.IsNullable,
-            IsShadowProperty = prop.IsShadowProperty(),
-            DbContextType = dbContext.GetType(),
-            LoaderName = loaderName,
-            Collection = nav.IsCollection,
-            Notes = notes,
-        };
+        var sb = new StringBuilder();
+        sb.AppendLine($"    /// <summary>");
+        sb.AppendLine($"    /// {this.Notes}");
+        sb.AppendLine($"    /// </summary>");
+        return sb.ToString();
     }
     
     public string Emit()
@@ -163,8 +111,6 @@ public record FieldExtension
         {
             childType += "?";
         }
-
-        sb.AppendLine($"    // {this.Notes}");
 
         if (this.Collection) // GroupLoader
         {
