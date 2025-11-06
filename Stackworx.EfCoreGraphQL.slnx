@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/sample/">
+    <Project Path="sample\Sample\Sample.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src\Stackworx.EfCoreGraphQL\Stackworx.EfCoreGraphQL.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests\Stackworx.EfCoreGraphQL.Tests\Stackworx.EfCoreGraphQL.Tests.csproj" Type="Classic C#" />
+  </Folder>
+</Solution>

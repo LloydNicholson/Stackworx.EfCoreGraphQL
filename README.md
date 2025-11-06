@@ -55,6 +55,9 @@ public class Author
 public class Book
 {
     public int Id { get; set; }
+    
+    // Cannot generate reverse dataloader without FK
+    public int AuthorId { get; set; }
     public Author Author { get; set; }
 }
 
@@ -72,6 +75,19 @@ internal static async Task<ILookup<int, Book>> BooksByAuthorId(
         .ToListAsync(cancellationToken);
 
     return books.ToLookup(b => b.AuthorId);
+}
+
+[ExtendObjectType(typeof(Book))]
+public sealed class BookExtensions
+{
+    public async Task<Author> GetAuthorAsync(
+        [Parent] Book parent,
+        IAuthorByIdDataLoader dataLoader,
+        CancellationToken ct)
+    {
+        // Foreign Key Required Here
+        return await dataLoader.LoadAsync(parent.AuthorId, ct);
+    }
 }
 
 [ExtendObjectType(typeof(Author))]
