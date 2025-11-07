@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <PackageVersion>0.0.1-alpha</PackageVersion>
+        <PackageVersion>0.0.3-alpha</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,7 +17,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Stackworx.EfCoreGraphQL.Abstractions\Stackworx.EfCoreGraphQL.Abstractions.csproj" />
-      <ProjectReference Include="..\Stackworx.EfCoreGraphQL.Shared\Stackworx.EfCoreGraphQL.Shared.csproj" />
+<!--      <ProjectReference Include="..\Stackworx.EfCoreGraphQL.Shared\Stackworx.EfCoreGraphQL.Shared.csproj" />-->
     </ItemGroup>
 
+    <ItemGroup>
+        <Compile Include="..\Shared\**\*.cs" Link="Shared\%(RecursiveDir)%(Filename)%(Extension)" />
+    </ItemGroup>
 </Project>

@@ -83,7 +83,7 @@ public static class DataLoaderGenerator
         }
 
         sb.AppendLine($"// {entity.DisplayName()}");
-        sb.AppendLine($"[ExtendObjectType(typeof({TypeUtils.GetNestedQualifiedName(entity.ClrType)}))]");
+        sb.AppendLine($"[ExtendObjectType<{TypeUtils.GetNestedQualifiedName(entity.ClrType)}>]");
         sb.AppendLine($"public class {entity.DisplayName()}Extensions");
         sb.AppendLine($"{{");
 
