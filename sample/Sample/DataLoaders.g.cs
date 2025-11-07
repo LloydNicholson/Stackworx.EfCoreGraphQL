@@ -17,7 +17,7 @@ using GreenDonut;
 using HotChocolate.Types;
 
 // Author
-[ExtendObjectType(typeof(Stackworx.EfCoreGraphQL.Tests.Data.Author))]
+[ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Author>]
 public class AuthorExtensions
 {
     /// <summary>
@@ -66,7 +66,7 @@ public class AuthorExtensions
 }
 
 // Book
-[ExtendObjectType(typeof(Stackworx.EfCoreGraphQL.Tests.Data.Book))]
+[ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Book>]
 public class BookExtensions
 {
     /// <summary>
@@ -87,7 +87,7 @@ public class BookExtensions
     /// <summary>
     /// GraphQL Field Override for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.Book.Author"/>
     /// </summary>
-    public static async Task<Stackworx.EfCoreGraphQL.Tests.Data.Author> GetAuthorAsync(
+    public async Task<Stackworx.EfCoreGraphQL.Tests.Data.Author> GetAuthorAsync(
         [Parent] Stackworx.EfCoreGraphQL.Tests.Data.Book parent,
         IAuthorByIdDataLoader loader,
         CancellationToken ct)
@@ -98,7 +98,7 @@ public class BookExtensions
 }
 
 // Comment
-[ExtendObjectType(typeof(Stackworx.EfCoreGraphQL.Tests.Data.Comment))]
+[ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Comment>]
 public class CommentExtensions
 {
     /// <summary>
@@ -135,7 +135,7 @@ public class CommentExtensions
 }
 
 // Course
-[ExtendObjectType(typeof(Stackworx.EfCoreGraphQL.Tests.Data.Course))]
+[ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Course>]
 public class CourseExtensions
 {
     /// <summary>
@@ -184,7 +184,7 @@ public class CourseExtensions
 }
 
 // Passport
-[ExtendObjectType(typeof(Stackworx.EfCoreGraphQL.Tests.Data.Passport))]
+[ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Passport>]
 public class PassportExtensions
 {
     /// <summary>
@@ -221,7 +221,7 @@ public class PassportExtensions
 }
 
 // Person
-[ExtendObjectType(typeof(Stackworx.EfCoreGraphQL.Tests.Data.Person))]
+[ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Person>]
 public class PersonExtensions
 {
     /// <summary>
@@ -268,7 +268,7 @@ public class PersonExtensions
 }
 
 // Post
-[ExtendObjectType(typeof(Stackworx.EfCoreGraphQL.Tests.Data.Post))]
+[ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Post>]
 public class PostExtensions
 {
     /// <summary>
@@ -340,7 +340,7 @@ public class PostExtensions
 }
 
 // Student
-[ExtendObjectType(typeof(Stackworx.EfCoreGraphQL.Tests.Data.Student))]
+[ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Student>]
 public class StudentExtensions
 {
     /// <summary>
@@ -389,7 +389,7 @@ public class StudentExtensions
 }
 
 // Tag
-[ExtendObjectType(typeof(Stackworx.EfCoreGraphQL.Tests.Data.Tag))]
+[ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Tag>]
 public class TagExtensions
 {
     /// <summary>
@@ -433,7 +433,7 @@ public class TagExtensions
 }
 
 // User
-[ExtendObjectType(typeof(Stackworx.EfCoreGraphQL.Tests.Data.User))]
+[ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.User>]
 public class UserExtensions
 {
     /// <summary>
@@ -480,7 +480,7 @@ public class UserExtensions
 }
 
 // UserProfile
-[ExtendObjectType(typeof(Stackworx.EfCoreGraphQL.Tests.Data.UserProfile))]
+[ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.UserProfile>]
 public class UserProfileExtensions
 {
     /// <summary>

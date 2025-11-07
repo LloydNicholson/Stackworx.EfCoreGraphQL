@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net9.0</TargetFramework>
@@ -9,14 +8,20 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.21"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.21"/>
-        <PackageReference Include="HotChocolate" Version="15.1.11"/>
-        <PackageReference Include="HotChocolate.Types.Analyzers" Version="15.1.11"/>
+        <PackageReference Include="HotChocolate.Data.EntityFramework" Version="15.1.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+          <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10" />
+        <PackageReference Include="HotChocolate" Version="15.1.11" />
+        <PackageReference Include="HotChocolate.AspNetCore" Version="15.1.11" />
+        <PackageReference Include="HotChocolate.Types.Analyzers" Version="15.1.11" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Stackworx.EfCoreGraphQL\Stackworx.EfCoreGraphQL.csproj"/>
+        <ProjectReference Include="..\..\src\Stackworx.EfCoreGraphQL\Stackworx.EfCoreGraphQL.csproj" />
     </ItemGroup>
 
 </Project>

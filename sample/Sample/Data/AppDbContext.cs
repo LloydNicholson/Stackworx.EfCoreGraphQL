@@ -239,15 +239,16 @@ public class AppDbContext : DbContext
 
         if (seed)
         {
-            await SeedAsync(ctx);
+            await ctx.SeedAsync();
         }
 
         return (ctx, connection);
     }
 
     // Simple seeding for DataLoader scenarios
-    private static async Task SeedAsync(AppDbContext db)
+    public async Task SeedAsync()
     {
+        var db = this;
         // Authors & Books (1:m)
         var a1 = new Author { Name = "Author A" };
         var a2 = new Author { Name = "Author B" };

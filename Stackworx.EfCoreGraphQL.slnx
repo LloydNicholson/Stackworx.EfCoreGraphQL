@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/sample/">
+    <Project Path="sample\Sample.Generate\Sample.Generate.csproj" Type="Classic C#" />
     <Project Path="sample\Sample\Sample.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/src/">
