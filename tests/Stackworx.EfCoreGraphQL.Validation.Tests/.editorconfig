@@ -1,0 +1,5 @@
+[*.cs]
+
+# Causes noise in tests
+# Disable nullability warning CS8618
+dotnet_diagnostic.CS8618.severity = none

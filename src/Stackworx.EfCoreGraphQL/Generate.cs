@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 public static class DataLoaderGenerator
 {
-    public static async Task Generate(DbContext dbContext, string outPath)
+    public static async Task Generate(DbContext dbContext, Func<IEntityType, bool>? filter, string outPath)
     {
         var model = dbContext.Model;
 
@@ -39,6 +39,12 @@ public static class DataLoaderGenerator
                      .OrderBy(e => e.Name))
         {
             if (entity.ShouldIgnore())
+            {
+                continue;
+            }
+
+            // Allow user to manually exclude specific entities
+            if (filter is not null && filter(entity))
             {
                 continue;
             }
