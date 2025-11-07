@@ -6,10 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Stackworx.EfCoreGraphQL.Abstractions;
+using Stackworx.EfCoreGraphQL.Shared;
 
 public static class DataLoaderGenerator
 {
-    public static async Task Generate(DbContext dbContext, Func<IEntityType, bool>? filter, string outPath)
+    public static async Task Generate(
+        DbContext dbContext,
+        string outPath,
+        Mode? mode = Mode.OptOut,
+        // Some types cannot be annotated and need to be manually excluded
+        // E.g. Identity types
+        Func<IEntityType, bool>? filter = null,
+        string? ns = "Generated.DataLoaders")
     {
         var model = dbContext.Model;
 
@@ -21,8 +30,7 @@ public static class DataLoaderGenerator
         sb.AppendLine("//  Style: HotChocolate [DataLoader] decorator methods");
         sb.AppendLine("// </auto-generated>");
         sb.AppendLine();
-        // TODO: make variable
-        sb.AppendLine("namespace Generated.DataLoaders;");
+        sb.AppendLine($"namespace {ns};");
         sb.AppendLine("using System;");
         sb.AppendLine("using System.Linq;");
         sb.AppendLine("using System.Threading;");
@@ -39,6 +47,11 @@ public static class DataLoaderGenerator
                      .OrderBy(e => e.Name))
         {
             if (entity.ShouldIgnore())
+            {
+                continue;
+            }
+
+            if (mode == Mode.OptIn && !entity.ShouldInclude())
             {
                 continue;
             }

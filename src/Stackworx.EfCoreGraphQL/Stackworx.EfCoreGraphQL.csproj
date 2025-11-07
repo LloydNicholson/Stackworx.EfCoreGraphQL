@@ -18,6 +18,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Stackworx.EfCoreGraphQL.Abstractions\Stackworx.EfCoreGraphQL.Abstractions.csproj"/>
+        <ProjectReference Include="..\Stackworx.EfCoreGraphQL.Shared\Stackworx.EfCoreGraphQL.Shared.csproj" />
     </ItemGroup>
 
 </Project>

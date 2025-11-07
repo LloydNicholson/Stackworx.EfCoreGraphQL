@@ -1,4 +1,4 @@
-namespace Stackworx.EfCoreGraphQL;
+namespace Stackworx.EfCoreGraphQL.Shared;
 
 using System.Reflection;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -46,5 +46,19 @@ public static class AttributeExtensions
                        || type.FullName == "HotChocolate.GraphQLIgnoreAttribute"
                        || type.FullName == "HotChocolate.Types.GraphQLIgnoreAttribute";
             });
+    }
+
+    public static bool ShouldInclude(this IEntityType entityType)
+    {
+        var clrType = entityType.ClrType;
+        var included = clrType
+            .GetCustomAttribute<EFCoreGraphQLIncludeAttribute>() is not null;
+
+        if (included)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

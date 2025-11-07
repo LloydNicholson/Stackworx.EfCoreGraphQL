@@ -5,12 +5,17 @@ using HotChocolate;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Stackworx.EfCoreGraphQL.Abstractions;
+using Stackworx.EfCoreGraphQL.Shared;
 
 public class EvaluateSchema
 {
     // TODO: create variation that relies on Xunit.assert to report multiple failures
     // Assert.Multiple();
-    public static List<Error> Evaluate(ISchema schema, IModel model)
+    public static List<Error> Evaluate(
+        ISchema schema,
+        IModel model,
+        Mode mode = Mode.OptOut)
     {
         var entities = model
             .GetEntityTypes()
@@ -26,6 +31,16 @@ public class EvaluateSchema
         // then
         foreach (var entity in entities)
         {
+            if (entity.ShouldIgnore())
+            {
+                continue;
+            }
+
+            if (mode == Mode.OptIn && !entity.ShouldInclude())
+            {
+                continue;
+            }
+            
             if (typesByRuntimeType.TryGetValue(entity.ClrType, out var types))
             {
                 switch (types.Count)

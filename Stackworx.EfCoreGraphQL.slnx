@@ -4,6 +4,7 @@
   </Folder>
   <Folder Name="/src/">
     <Project Path="src\Stackworx.EfCoreGraphQL.Abstractions\Stackworx.EfCoreGraphQL.Abstractions.csproj" Type="Classic C#" />
+    <Project Path="src\Stackworx.EfCoreGraphQL.Shared\Stackworx.EfCoreGraphQL.Shared.csproj" Type="Classic C#" />
     <Project Path="src\Stackworx.EfCoreGraphQL.Validation.XunitV3\Stackworx.EfCoreGraphQL.Validation.XunitV3.csproj" Type="Classic C#" />
     <Project Path="src\Stackworx.EfCoreGraphQL.Validation\Stackworx.EfCoreGraphQL.Validation.csproj" Type="Classic C#" />
     <Project Path="src\Stackworx.EfCoreGraphQL\Stackworx.EfCoreGraphQL.csproj" Type="Classic C#" />

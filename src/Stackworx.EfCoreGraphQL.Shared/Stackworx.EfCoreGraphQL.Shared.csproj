@@ -4,20 +4,15 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <PackageVersion>0.0.1-alpha</PackageVersion>
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="HotChocolate.Execution" Version="15.1.11" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.*" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Stackworx.EfCoreGraphQL.Abstractions\Stackworx.EfCoreGraphQL.Abstractions.csproj" />
-      <ProjectReference Include="..\Stackworx.EfCoreGraphQL.Shared\Stackworx.EfCoreGraphQL.Shared.csproj" />
     </ItemGroup>
 
 </Project>

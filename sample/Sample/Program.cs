@@ -7,4 +7,4 @@ var (dbContext, _) = await AppDbContext.CreateSqliteInMemoryAsync();
 
 
 var outPath = Path.Combine(Environment.CurrentDirectory, "DataLoaders.g.cs");
-await DataLoaderGenerator.Generate(dbContext, null, outPath);
+await DataLoaderGenerator.Generate(dbContext, outPath);
