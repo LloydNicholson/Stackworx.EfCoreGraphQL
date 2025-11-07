@@ -23,6 +23,7 @@ public class Tests
                 ReferenceField = "Id",
                 DbContextType = typeof(AppDbContext),
                 IsShadowProperty = false,
+                Notes = "Primary Key Data Loader for <see cref=\"Stackworx.EfCoreGraphQL.Tests.Data.User\"/>",
             });
 
             config.Emit().Should().MatchSource(
@@ -65,6 +66,7 @@ public class Tests
                 ReferenceField = "UserId",
                 DbContextType = typeof(AppDbContext),
                 IsShadowProperty = false,
+                Notes = "Navigation Data Loader for <see cref=\"Stackworx.EfCoreGraphQL.Tests.Data.UserProfile.User\"/>",
             });
             
             dataLoaderConfig.Emit().Should().MatchSource(
@@ -94,13 +96,12 @@ public class Tests
                 ChildTypeNullable = false,
                 NavigationName = "Profile",
                 LoaderName = "IUserProfileByUserIdDataLoader",
-                Notes = "User.Profile",
+                Notes = "GraphQL Field Override for <see cref=\"Stackworx.EfCoreGraphQL.Tests.Data.User.Profile\"/>",
                 IsShadowProperty = false,
             });
 
             fieldConfig.Emit().Should().MatchSource(
                 """
-                        // User.Profile
                         public static async Task<Stackworx.EfCoreGraphQL.Tests.Data.UserProfile> GetProfileAsync(
                             [Parent] Stackworx.EfCoreGraphQL.Tests.Data.User parent,
                             IUserProfileByUserIdDataLoader loader,
@@ -135,6 +136,7 @@ public class Tests
                 ReferenceField = "Id",
                 DbContextType = typeof(AppDbContext),
                 IsShadowProperty = false,
+                Notes = "Navigation Data Loader for <see cref=\"Stackworx.EfCoreGraphQL.Tests.Data.User.Profile\"/>",
             });
             
             config.Emit().Should().MatchSource(
@@ -164,13 +166,12 @@ public class Tests
                 ChildTypeNullable = false,
                 NavigationName = "User",
                 LoaderName = "IUserByIdDataLoader",
-                Notes = "UserProfile.User",
+                Notes = "GraphQL Field Override for <see cref=\"Stackworx.EfCoreGraphQL.Tests.Data.UserProfile.User\"/>",
                 IsShadowProperty = false,
             });
             
             fieldConfig.Emit().Should().MatchSource(
                 """
-                    // UserProfile.User
                     public static async Task<Stackworx.EfCoreGraphQL.Tests.Data.User> GetUserAsync(
                         [Parent] Stackworx.EfCoreGraphQL.Tests.Data.UserProfile parent,
                         IUserByIdDataLoader loader,
@@ -203,6 +204,7 @@ public class Tests
                 ReferenceField = "PersonId",
                 DbContextType = typeof(AppDbContext),
                 IsShadowProperty = false,
+                Notes = "Navigation Data Loader for <see cref=\"Stackworx.EfCoreGraphQL.Tests.Data.Passport.Person\"/>",
             });
 
             var fieldConfig = FieldExtension.FromNavigation(db, nav);
@@ -217,13 +219,12 @@ public class Tests
                 ChildTypeNullable = true,
                 NavigationName = "Passport",
                 LoaderName = "IPassportByPersonIdDataLoader",
-                Notes = "Person.Passport",
+                Notes = "GraphQL Field Override for <see cref=\"Stackworx.EfCoreGraphQL.Tests.Data.Person.Passport\"/>",
                 IsShadowProperty = false,
             });
 
             fieldConfig.Emit().Should().MatchSource(
                 """
-                    // Person.Passport
                     public static async Task<Stackworx.EfCoreGraphQL.Tests.Data.Passport?> GetPassportAsync(
                         [Parent] Stackworx.EfCoreGraphQL.Tests.Data.Person parent,
                         IPassportByPersonIdDataLoader loader,
@@ -257,6 +258,7 @@ public class Tests
                 ReferenceField = "PostId",
                 DbContextType = typeof(AppDbContext),
                 IsShadowProperty = false,
+                Notes = "Navigation Data Loader for <see cref=\"Stackworx.EfCoreGraphQL.Tests.Data.Comment.Post\"/>",
             });
 
             config.Emit().Should().MatchSource(
@@ -288,13 +290,12 @@ public class Tests
                 ChildTypeNullable = false,
                 NavigationName = "Comments",
                 LoaderName = "ICommentsByPostIdDataLoader",
-                Notes = "Post.Comments",
+                Notes = "GraphQL Field Override for <see cref=\"Stackworx.EfCoreGraphQL.Tests.Data.Post.Comments\"/>",
                 IsShadowProperty = false,
             });
             
             fieldConfig.Emit().Should().MatchSource(
                 """
-                    // Post.Comments
                     public static async Task<IList<Stackworx.EfCoreGraphQL.Tests.Data.Comment>> GetCommentsAsync(
                         [Parent] Stackworx.EfCoreGraphQL.Tests.Data.Post parent,
                         ICommentsByPostIdDataLoader loader,
