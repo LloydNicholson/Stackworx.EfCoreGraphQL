@@ -75,7 +75,7 @@ public class EvaluateSchema
         
         var navigations = entity
             .GetNavigations()
-            .Where(n => !n.TargetEntityType.IsOwned())
+            .Where(n => !n.IsEagerLoaded && !n.TargetEntityType.IsOwned())
             .ToList();
 
         foreach (var nav in navigations)

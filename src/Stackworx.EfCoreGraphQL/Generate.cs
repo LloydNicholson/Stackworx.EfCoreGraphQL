@@ -95,7 +95,7 @@ public static class DataLoaderGenerator
         }
 
         foreach (var navigation in entity.GetNavigations()
-                     .Where(n => !n.IsEagerLoaded)
+                     .Where(n => !n.IsEagerLoaded && !n.TargetEntityType.IsOwned())
                      .OrderBy(n => n.Name))
         {
             // TODO: warning about composite keys
