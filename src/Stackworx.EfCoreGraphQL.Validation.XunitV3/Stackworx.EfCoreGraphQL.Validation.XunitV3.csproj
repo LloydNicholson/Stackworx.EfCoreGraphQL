@@ -6,4 +6,15 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <PackageVersion>0.0.1-alpha</PackageVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Stackworx.EfCoreGraphQL.Validation\Stackworx.EfCoreGraphQL.Validation.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="xunit.v3.assert" Version="3.2.0" />
+    </ItemGroup>
 </Project>

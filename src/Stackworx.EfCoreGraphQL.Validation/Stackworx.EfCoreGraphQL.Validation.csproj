@@ -6,6 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <PackageVersion>0.0.1-alpha</PackageVersion>
+    </PropertyGroup>
+
     <ItemGroup>
       <PackageReference Include="HotChocolate.Execution" Version="15.1.11" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.21" />
