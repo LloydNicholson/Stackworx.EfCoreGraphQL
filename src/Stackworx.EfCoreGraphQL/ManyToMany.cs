@@ -90,7 +90,7 @@ public record ManyToMany
         // sb.AppendLine($"    // {this.Notes}");
 
         sb.AppendLine(
-            $"    public async Task<{childType}[]> Get{this.ChildPropertyName}Async(");
+            $"    public static async Task<{childType}[]> Get{this.ChildPropertyName}Async(");
         sb.AppendLine($"        [Parent] {parentType} parent,");
         sb.AppendLine($"        I{this.LoaderName}DataLoader loader,");
         sb.AppendLine($"        CancellationToken ct)");

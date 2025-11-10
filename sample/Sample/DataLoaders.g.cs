@@ -18,7 +18,7 @@ using HotChocolate.Types;
 
 // Author
 [ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Author>]
-public class AuthorExtensions
+public static class AuthorExtensions
 {
     /// <summary>
     /// Primary Key Data Loader for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.Author"/>
@@ -67,7 +67,7 @@ public class AuthorExtensions
 
 // Book
 [ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Book>]
-public class BookExtensions
+public static class BookExtensions
 {
     /// <summary>
     /// Primary Key Data Loader for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.Book"/>
@@ -87,7 +87,7 @@ public class BookExtensions
     /// <summary>
     /// GraphQL Field Override for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.Book.Author"/>
     /// </summary>
-    public async Task<Stackworx.EfCoreGraphQL.Tests.Data.Author> GetAuthorAsync(
+    public static async Task<Stackworx.EfCoreGraphQL.Tests.Data.Author> GetAuthorAsync(
         [Parent] Stackworx.EfCoreGraphQL.Tests.Data.Book parent,
         IAuthorByIdDataLoader loader,
         CancellationToken ct)
@@ -99,7 +99,7 @@ public class BookExtensions
 
 // Comment
 [ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Comment>]
-public class CommentExtensions
+public static class CommentExtensions
 {
     /// <summary>
     /// Primary Key Data Loader for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.Comment"/>
@@ -136,7 +136,7 @@ public class CommentExtensions
 
 // Course
 [ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Course>]
-public class CourseExtensions
+public static class CourseExtensions
 {
     /// <summary>
     /// Primary Key Data Loader for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.Course"/>
@@ -185,7 +185,7 @@ public class CourseExtensions
 
 // Passport
 [ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Passport>]
-public class PassportExtensions
+public static class PassportExtensions
 {
     /// <summary>
     /// Primary Key Data Loader for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.Passport"/>
@@ -222,7 +222,7 @@ public class PassportExtensions
 
 // Person
 [ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Person>]
-public class PersonExtensions
+public static class PersonExtensions
 {
     /// <summary>
     /// Primary Key Data Loader for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.Person"/>
@@ -269,7 +269,7 @@ public class PersonExtensions
 
 // Post
 [ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Post>]
-public class PostExtensions
+public static class PostExtensions
 {
     /// <summary>
     /// Primary Key Data Loader for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.Post"/>
@@ -341,7 +341,7 @@ public class PostExtensions
 
 // Student
 [ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Student>]
-public class StudentExtensions
+public static class StudentExtensions
 {
     /// <summary>
     /// Primary Key Data Loader for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.Student"/>
@@ -390,7 +390,7 @@ public class StudentExtensions
 
 // Tag
 [ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.Tag>]
-public class TagExtensions
+public static class TagExtensions
 {
     /// <summary>
     /// Primary Key Data Loader for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.Tag"/>
@@ -434,7 +434,7 @@ public class TagExtensions
 
 // User
 [ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.User>]
-public class UserExtensions
+public static class UserExtensions
 {
     /// <summary>
     /// Primary Key Data Loader for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.User"/>
@@ -481,7 +481,7 @@ public class UserExtensions
 
 // UserProfile
 [ExtendObjectType<Stackworx.EfCoreGraphQL.Tests.Data.UserProfile>]
-public class UserProfileExtensions
+public static class UserProfileExtensions
 {
     /// <summary>
     /// Primary Key Data Loader for <see cref="Stackworx.EfCoreGraphQL.Tests.Data.UserProfile"/>

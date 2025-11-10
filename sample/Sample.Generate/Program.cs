@@ -6,5 +6,5 @@ using Stackworx.EfCoreGraphQL.Tests.Data;
 var (dbContext, _) = await AppDbContext.CreateSqliteInMemoryAsync();
 
 
-var outPath = Path.Combine(Environment.CurrentDirectory, "DataLoaders.g.cs");
+var outPath = Path.Combine(Environment.CurrentDirectory, "../Sample/DataLoaders.g.cs");
 await DataLoaderGenerator.Generate(dbContext, outPath);

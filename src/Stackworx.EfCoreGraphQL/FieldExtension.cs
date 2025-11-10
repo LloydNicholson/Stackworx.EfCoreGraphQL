@@ -115,7 +115,7 @@ public record FieldExtension
         if (this.Collection) // GroupLoader
         {
             sb.AppendLine(
-                $"    public async Task<IList<{childType}>> Get{this.NavigationName}Async(");
+                $"    public static async Task<IList<{childType}>> Get{this.NavigationName}Async(");
             sb.AppendLine($"        [Parent] {parentType} parent,");
             sb.AppendLine($"        {this.LoaderName} loader,");
             sb.AppendLine($"        CancellationToken ct)");
@@ -126,7 +126,7 @@ public record FieldExtension
         else // Batch Loader
         {
             sb.AppendLine(
-                $"    public async Task<{childType}> Get{this.NavigationName}Async(");
+                $"    public static async Task<{childType}> Get{this.NavigationName}Async(");
             sb.AppendLine($"        [Parent] {parentType} parent,");
             sb.AppendLine($"        {this.LoaderName} loader,");
             sb.AppendLine($"        CancellationToken ct)");

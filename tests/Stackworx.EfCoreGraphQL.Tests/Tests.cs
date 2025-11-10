@@ -102,7 +102,7 @@ public class Tests
 
             fieldConfig.Emit().Should().MatchSource(
                 """
-                        public async Task<Stackworx.EfCoreGraphQL.Tests.Data.UserProfile> GetProfileAsync(
+                        public static async Task<Stackworx.EfCoreGraphQL.Tests.Data.UserProfile> GetProfileAsync(
                             [Parent] Stackworx.EfCoreGraphQL.Tests.Data.User parent,
                             IUserProfileByUserIdDataLoader loader,
                             CancellationToken ct)
@@ -172,7 +172,7 @@ public class Tests
             
             fieldConfig.Emit().Should().MatchSource(
                 """
-                    public async Task<Stackworx.EfCoreGraphQL.Tests.Data.User> GetUserAsync(
+                    public static async Task<Stackworx.EfCoreGraphQL.Tests.Data.User> GetUserAsync(
                         [Parent] Stackworx.EfCoreGraphQL.Tests.Data.UserProfile parent,
                         IUserByIdDataLoader loader,
                         CancellationToken ct)
@@ -225,7 +225,7 @@ public class Tests
 
             fieldConfig.Emit().Should().MatchSource(
                 """
-                    public async Task<Stackworx.EfCoreGraphQL.Tests.Data.Passport?> GetPassportAsync(
+                    public static async Task<Stackworx.EfCoreGraphQL.Tests.Data.Passport?> GetPassportAsync(
                         [Parent] Stackworx.EfCoreGraphQL.Tests.Data.Person parent,
                         IPassportByPersonIdDataLoader loader,
                         CancellationToken ct)
@@ -296,7 +296,7 @@ public class Tests
             
             fieldConfig.Emit().Should().MatchSource(
                 """
-                    public async Task<IList<Stackworx.EfCoreGraphQL.Tests.Data.Comment>> GetCommentsAsync(
+                    public static async Task<IList<Stackworx.EfCoreGraphQL.Tests.Data.Comment>> GetCommentsAsync(
                         [Parent] Stackworx.EfCoreGraphQL.Tests.Data.Post parent,
                         ICommentsByPostIdDataLoader loader,
                         CancellationToken ct)
@@ -354,7 +354,7 @@ public class Tests
 
             manyToMany.EmitFieldExtension().Should().MatchSource(
                 """
-                    public async Task<Stackworx.EfCoreGraphQL.Tests.Data.Tag[]> GetTagsAsync(
+                    public static async Task<Stackworx.EfCoreGraphQL.Tests.Data.Tag[]> GetTagsAsync(
                         [Parent] Stackworx.EfCoreGraphQL.Tests.Data.Post parent,
                         ITagsByPostsDataLoader loader,
                         CancellationToken ct)
@@ -412,7 +412,7 @@ public class Tests
 
             manyToMany.EmitFieldExtension().Should().MatchSource(
                 """
-                    public async Task<Stackworx.EfCoreGraphQL.Tests.Data.Post[]> GetPostsAsync(
+                    public static async Task<Stackworx.EfCoreGraphQL.Tests.Data.Post[]> GetPostsAsync(
                         [Parent] Stackworx.EfCoreGraphQL.Tests.Data.Tag parent,
                         IPostsByTagsDataLoader loader,
                         CancellationToken ct)
