@@ -1,5 +1,6 @@
 namespace Stackworx.EfCoreGraphQL;
 
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,8 @@ public static class DataLoaderGenerator
         // Some types cannot be annotated and need to be manually excluded
         // E.g. Identity types
         Func<IEntityType, bool>? filter = null,
-        string? ns = "Generated.DataLoaders")
+        string? ns = "Generated.DataLoaders",
+        bool ci = false)
     {
         var model = dbContext.Model;
 
@@ -66,6 +68,44 @@ public static class DataLoaderGenerator
         }
         
         await File.WriteAllTextAsync(outPath, sb.ToString());
+
+        if (ci)
+        {
+            var hasChanges = !RunCommand("git", "diff --quiet");
+
+            if (hasChanges)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("❌ Changes detected in generated files!");
+                Console.ResetColor();
+                RunCommand("git", "diff");
+                System.Environment.Exit(1);
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("✅ No changes detected. Generated files are up to date.");
+            Console.ResetColor();
+        }
+    }
+
+    private static bool RunCommand(string fileName, string args)
+    {
+        var psi = new ProcessStartInfo
+        {
+            FileName = fileName,
+            Arguments = args,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false
+        };
+
+        using var process = Process.Start(psi)!;
+        process.WaitForExit();
+
+        Console.WriteLine(process.StandardOutput.ReadToEnd());
+        Console.Error.WriteLine(process.StandardError.ReadToEnd());
+
+        return process.ExitCode == 0;
     }
 
     private static void Generate(DbContext dbContext, IEntityType entity, StringBuilder sb)
