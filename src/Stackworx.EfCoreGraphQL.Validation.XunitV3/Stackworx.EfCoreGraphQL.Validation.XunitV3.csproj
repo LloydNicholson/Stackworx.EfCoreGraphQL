@@ -1,20 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <PropertyGroup>
-        <PackageVersion>0.0.4-alpha</PackageVersion>
+        <PackageVersion>0.0.5-alpha</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Stackworx.EfCoreGraphQL.Validation\Stackworx.EfCoreGraphQL.Validation.csproj" />
+        <ProjectReference Include="..\Stackworx.EfCoreGraphQL.Validation\Stackworx.EfCoreGraphQL.Validation.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="xunit.v3.assert" Version="3.2.0" />
+        <PackageReference Include="xunit.v3.assert" Version="3.2.0"/>
     </ItemGroup>
 </Project>
